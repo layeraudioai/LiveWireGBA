@@ -8,6 +8,7 @@
 -WIP
 --
  IT IS A MULTIBOOT GBA ROM, the cartridge port on the GBA is taken by the Gutiar Grip, use this to boot on any unmodded GBA: https://github.com/FIX94/gba-link-cable-rom-sender
+--
  How it works:
    - songs/ Directory: Place your MIDI (.mid) files here.
    - tools/midi_to_chart.py: A custom, zero-dependency Python script that parses MIDI files and converts them into C ChartNote triples. It automatically:
