@@ -7,7 +7,7 @@
 --
 -WIP
 --
- IT IS A MULTIBOOT GBA ROM, the cartridge port on the GBA is taken by the Gutiar Grip, use this to boot on any unmodded GBA: https://github.com/FIX94/gba-link-cable-rom-sender
+ IT IS A MULTIBOOT GBA ROM, the cartridge port on the GBA is taken by the Guitar Grip, use this to boot on any unmodded GBA: https://github.com/FIX94/gba-link-cable-rom-sender
 --
  How it works:
    - songs/ Directory: Place your MIDI (.mid) files here.
