@@ -1,9 +1,12 @@
-# LiveWireGBA
--LiveWire is an upcoming game based off Guitar Hero that uses a new controller with 7 frets 3 strings (21 frets) and real guitar strings. 
---
--The strings (21 frets) join pads when pressed as they are conductive and carry the signal of the song through them at the same time. 
---
--This repsoitory is for the GBA de-make using the DS Guitar Hero Grip. 
---
--WIP
---
+# gba-rom-template
+A simple template to write GBA ROM
+
+> You have to install `Devkitpro` and `DevkitARM`. If your 
+> are on OSX or Linux, you can use this perl file : 
+https://gist.github.com/xvw/d14b5d396c01e36c26b13a27adab029b
+
+
+## Commands
+
+-  `make` : to build the ROM
+-  `make clean` : to clean the compiled files
