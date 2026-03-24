@@ -7,6 +7,8 @@
 --
 -WIP
 --
+ IT IS A MULTIBOOT GBA ROM, the cartridge port on the GBA is taken by the Gutiar Grip, use this to boot on any unmodded GBA: https://github.com/FIX94/gba-link-cable-rom-sender
+--
  How it works:
    - songs/ Directory: Place your MIDI (.mid) files here.
    - tools/midi_to_chart.py: A custom, zero-dependency Python script that parses MIDI files and converts them into C ChartNote triples. It automatically:
@@ -17,6 +19,6 @@
    - Menu Support: The game dynamically loads whatever songs are in the playlist. If no songs are found, the menu remains empty.
 
   To add a song:
-   1. Drop a MIDI file into gba-rom-template/songs/.
+   1. Drop a MIDI file into LiveWireGBA/songs/.
    2. Run make.
    3. The new song will automatically appear in the GBA's selection menu.
