@@ -17,6 +17,6 @@
    - Menu Support: The game dynamically loads whatever songs are in the playlist. If no songs are found, the menu remains empty.
 
   To add a song:
-   1. Drop a MIDI file into gba-rom-template/songs/.
+   1. Drop a MIDI file into LiveWireGBA/songs/.
    2. Run make.
    3. The new song will automatically appear in the GBA's selection menu.
