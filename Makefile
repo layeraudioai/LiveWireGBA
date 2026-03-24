@@ -37,6 +37,9 @@ LIBDIRS	:=	$(LIBGBA)
 
 ifneq ($(BUILDDIR), $(CURDIR))
 
+# Default target
+all: $(BUILD)
+
 export OUTPUT	:=	$(CURDIR)/$(TARGET)
 export VPATH	:=	$(foreach dir,$(SOURCES),$(CURDIR)/$(dir)) \
 					$(foreach dir,$(DATA),$(CURDIR)/$(dir))
@@ -76,7 +79,7 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES),-iquote $(CURDIR)/$(dir)) \
  
 export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib)
 
-.PHONY: $(BUILD) clean
+.PHONY: all $(BUILD) clean
  
 $(BUILD): $(PLAYLIST_C)
 	@[ -d $@ ] || mkdir -p $@

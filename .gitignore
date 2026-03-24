@@ -36,3 +36,6 @@ build/*
 
 #VScode
 .vscode/
+
+#Songs
+songs/
