@@ -1,24 +1,23 @@
 #ifndef GBA_HELPER_H
 #define GBA_HELPER_H
 
-/* Alias for more conveinent usage */
-typedef unsigned char   u8;
-typedef unsigned short  u16;
-typedef unsigned int    u32;
-typedef u16             COLOR;
+#include <gba_types.h>
+#include <gba_video.h>
+#include <gba_input.h>
+#include <gba_systemcalls.h>
+#include <gba_interrupt.h>
 
-/* Information about the device */
+typedef u16 COLOR;
+
 #define SCREEN_WIDTH    240
 #define SCREEN_HEIGHT   160
 
-/* Memory Mapped Registers */
-#define REG_DISPLAYCONTROL *((volatile u32*)(0x04000000))
-#define REG_WAITCNT        *((volatile u16*)(0x04000204))
-
-#define VIDEO_MODE_0 0x0000
-#define BG0_ENABLE   0x0100
-#define OBJ_ENABLE   0x1000
-#define OBJ_MAP_1D   0x0040
+/* DS Guitar Hero Grip */
+#define GRIP_ADDR    ((volatile u16*)0x08000000)
+#define GRIP_GREEN   (1 << 1)
+#define GRIP_RED     (1 << 2)
+#define GRIP_YELLOW  (1 << 3)
+#define GRIP_BLUE    (1 << 4)
 
 /* Sound Registers */
 #define REG_SOUNDCNT_L     *((volatile u16*)(0x04000080))
@@ -28,35 +27,7 @@ typedef u16             COLOR;
 #define REG_SOUND1CNT_H    *((volatile u16*)(0x04000062))
 #define REG_SOUND1CNT_X    *((volatile u16*)(0x04000064))
 
-/* Standard GBA Buttons */
-#define REG_KEYINPUT  *((volatile u16*)0x04000130)
-#define KEY_A        (1 << 0)
-#define KEY_B        (1 << 1)
-#define KEY_SELECT   (1 << 2)
-#define KEY_START    (1 << 3)
-#define KEY_RIGHT    (1 << 4)
-#define KEY_LEFT     (1 << 5)
-#define KEY_UP       (1 << 6)
-#define KEY_DOWN     (1 << 7)
-#define KEY_R        (1 << 8)
-#define KEY_L        (1 << 9)
-
-/* DS Guitar Hero Grip */
-#define GRIP_ADDR    ((volatile u16*)0x08000000)
-#define GRIP_GREEN   (1 << 1)
-#define GRIP_RED     (1 << 2)
-#define GRIP_YELLOW  (1 << 3)
-#define GRIP_BLUE    (1 << 4)
-
-/* VBlank Sync */
-#define REG_VCOUNT    *((volatile u16*)0x04000006)
-
-static inline void vsync() {
-  while(REG_VCOUNT >= 160);
-  while(REG_VCOUNT < 160);
-}
-
-/* OAM (Object Attribute Memory) */
+/* Sprite/OAM Helpers */
 typedef struct {
     u16 attr0;
     u16 attr1;
@@ -65,19 +36,15 @@ typedef struct {
 } __attribute__((packed, aligned(4))) OBJATTR;
 
 #define OAM ((volatile OBJATTR*)0x07000000)
-
-/* Palettes */
-#define BG_PALETTE  ((volatile u16*)0x05000000)
-#define OBJ_PALETTE ((volatile u16*)0x05000200)
-
-/* Video RAM */
-#define VRAM        ((volatile u16*)0x06000000)
-#define CHAR_BASE(n) ((volatile u16*)(0x06000000 + (n) * 0x4000))
-#define SCREEN_BASE(n) ((volatile u16*)(0x06000000 + (n) * 0x800))
 #define OBJ_BASE_ADR 0x06010000
+#define OBJ_PALETTE_RAM ((u16*)0x05000200)
 
-/* Note Frequencies for GBA Sound Channel 1 */
-/* Formula: 2048 - (131072 / freq_hz) */
+/* Sprite Attribute Constants */
+#define ATTR0_SQUARE    0x0000
+#define ATTR0_HIDE      0x0080
+#define ATTR1_SIZE_16   0x4000
+
+/* Note Frequencies */
 #define NOTE_C4  1605
 #define NOTE_CS4 1629
 #define NOTE_D4  1652
@@ -116,7 +83,6 @@ typedef struct {
 #define NOTE_B6  1994
 #define NOTE_C7  1997
 
-/* Define a color with RGB values */
 static inline COLOR RGB(u32 red, u32 green, u32 blue) {   
   return red | (green<<5) | (blue<<10);   
 }
